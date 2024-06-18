@@ -27,8 +27,8 @@ public class TestRunner {
         validator.checkStaticAnnotation(c, BeforeSuite.class);
         validator.checkStaticAnnotation(c, AfterSuite.class);
 
-        Constructor constructor = c.getConstructor();
-        CustomTest customTest = (CustomTest) constructor.newInstance();
+        Constructor<CustomTest> constructor = c.getConstructor();
+        CustomTest customTest = constructor.newInstance();
 
         List<Method> beforeMethods = getMethodWithAnnotation(c, BeforeSuite.class);
         if (!beforeMethods.isEmpty()) {
