@@ -1,16 +1,15 @@
-package main.java.ru.example;
+package main.java.ru.example.example1;
 
-import main.java.ru.example.annotations.AfterSuite;
-import main.java.ru.example.annotations.BeforeSuite;
-import main.java.ru.example.annotations.CsvSource;
-import main.java.ru.example.annotations.Test;
-import main.java.ru.example.exceptions.AnnotationValidatorException;
+import main.java.ru.example.example1.annotations.AfterSuite;
+import main.java.ru.example.example1.annotations.BeforeSuite;
+import main.java.ru.example.example1.annotations.CsvSource;
+import main.java.ru.example.example1.annotations.Test;
+import main.java.ru.example.example1.exceptions.AnnotationValidatorException;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -27,8 +26,8 @@ public class TestRunner {
         validator.checkStaticAnnotation(c, BeforeSuite.class);
         validator.checkStaticAnnotation(c, AfterSuite.class);
 
-        Constructor constructor = c.getConstructor();
-        CustomTest customTest = (CustomTest) constructor.newInstance();
+        Constructor<CustomTest> constructor = c.getConstructor();
+        CustomTest customTest = constructor.newInstance();
 
         List<Method> beforeMethods = getMethodWithAnnotation(c, BeforeSuite.class);
         if (!beforeMethods.isEmpty()) {
@@ -38,8 +37,7 @@ public class TestRunner {
 
         List<Method> testMethods = getMethodWithAnnotation(c, Test.class);
         if (!testMethods.isEmpty()) {
-            Collections.sort(testMethods, Comparator.comparing(value -> value.getAnnotation(Test.class).priority()));
-            Collections.reverse(testMethods);
+            testMethods.sort(Comparator.comparing(value -> ((Method)value).getAnnotation(Test.class).priority()).reversed());
             for (Method testMethod : testMethods) {
                 if (testMethod.isAnnotationPresent(CsvSource.class)) {
                     String source = testMethod.getAnnotation(CsvSource.class).value();
@@ -50,6 +48,7 @@ public class TestRunner {
                 }
             }
         }
+
 
         List<Method> afterMethods = getMethodWithAnnotation(c, AfterSuite.class);
         if (!afterMethods.isEmpty()) {

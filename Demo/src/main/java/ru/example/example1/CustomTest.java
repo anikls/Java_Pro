@@ -1,9 +1,9 @@
-package main.java.ru.example;
+package main.java.ru.example.example1;
 
-import main.java.ru.example.annotations.AfterSuite;
-import main.java.ru.example.annotations.BeforeSuite;
-import main.java.ru.example.annotations.CsvSource;
-import main.java.ru.example.annotations.Test;
+import main.java.ru.example.example1.annotations.AfterSuite;
+import main.java.ru.example.example1.annotations.BeforeSuite;
+import main.java.ru.example.example1.annotations.CsvSource;
+import main.java.ru.example.example1.annotations.Test;
 
 /**
  * @author NAgafonov
