@@ -1,4 +1,4 @@
-package main.java.ru.example.exceptions;
+package main.java.ru.example.example1.exceptions;
 
 /**
  * Ошибка примения аннотаций

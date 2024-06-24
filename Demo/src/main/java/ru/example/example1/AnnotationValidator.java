@@ -1,6 +1,6 @@
-package main.java.ru.example;
+package main.java.ru.example.example1;
 
-import main.java.ru.example.exceptions.AnnotationValidatorException;
+import main.java.ru.example.example1.exceptions.AnnotationValidatorException;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
