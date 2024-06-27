@@ -5,6 +5,6 @@ package main.java.ru.example.examle2;
  */
 public enum WorkerPosition {
     WORKER,
-    INGENER,
+    ENGINEER,
     DIRECTOR
 }

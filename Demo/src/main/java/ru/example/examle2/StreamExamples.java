@@ -1,13 +1,9 @@
 package main.java.ru.example.examle2;
 
-import java.awt.print.Book;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
 import java.util.stream.Collectors;
 
 /**
@@ -40,13 +36,13 @@ public class StreamExamples {
         System.out.println(LIST_INT.stream().sorted(Comparator.reverseOrder()).distinct().collect(Collectors.toList()).get(2));
 
         final List<Worker> LIST_WORKERS = List.of(
-                new Worker("Star Star", 93, WorkerPosition.INGENER),
+                new Worker("Star Star", 93, WorkerPosition.ENGINEER),
                 new Worker("Bob", 34, WorkerPosition.WORKER),
-                new Worker("Jon", 42, WorkerPosition.INGENER),
+                new Worker("Jon", 42, WorkerPosition.ENGINEER),
                 new Worker("Billi", 20, WorkerPosition.WORKER),
                 new Worker("Stepan", 50, WorkerPosition.DIRECTOR),
-                new Worker("Ivan", 49, WorkerPosition.INGENER),
-                new Worker("Alex", 45, WorkerPosition.INGENER)
+                new Worker("Ivan", 49, WorkerPosition.ENGINEER),
+                new Worker("Alex", 45, WorkerPosition.ENGINEER)
         );
 
         System.out.println("\n========= 4 =========");
@@ -55,7 +51,7 @@ public class StreamExamples {
         System.out.println(LIST_WORKERS);
         System.out.println("Результат:");
         System.out.println(LIST_WORKERS.stream()
-                .filter(worker -> WorkerPosition.INGENER.equals(worker.getPosition()))
+                .filter(worker -> WorkerPosition.ENGINEER.equals(worker.getPosition()))
                 .sorted(Comparator.comparing(Worker::getAge).reversed())
                 .limit(3)
                 .map(Worker::getName)
@@ -67,7 +63,7 @@ public class StreamExamples {
         System.out.println(LIST_WORKERS);
         System.out.println("Результат:");
         System.out.println(LIST_WORKERS.stream()
-                .filter(worker -> WorkerPosition.INGENER.equals(worker.getPosition()))
+                .filter(worker -> WorkerPosition.ENGINEER.equals(worker.getPosition()))
                 .map(Worker::getAge)
                 .reduce((age1, age2) -> Math.round((age1 + age2) / 2)).get());
 
