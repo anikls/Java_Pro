@@ -19,21 +19,31 @@ public class StreamExamples {
         final List<Integer> LIST_INT = List.of(5, 2, 10, 9, 4, 3, 10, 1, 13);
         System.out.println(LIST_INT);
         System.out.println("Результат:");
-        System.out.println(LIST_INT.stream().distinct().collect(Collectors.toList()));
+        System.out.println(LIST_INT.stream()
+                .distinct()
+                .collect(Collectors.toList())
+        );
 
         System.out.println("\n========= 2 =========");
         System.out.println("Найдите в списке целых чисел 3-е наибольшее число");
         System.out.println("Исходные данные:");
         System.out.println(LIST_INT);
         System.out.println("Результат:");
-        System.out.println(LIST_INT.stream().sorted(Comparator.reverseOrder()).collect(Collectors.toList()).get(2));
+        System.out.println(LIST_INT.stream()
+                .sorted(Comparator.reverseOrder())
+                .collect(Collectors.toList())
+                .get(2));
 
         System.out.println("\n========= 3 =========");
         System.out.println(" Найдите в списке целых чисел 3-е наибольшее «уникальное» число (пример: 5 2 10 9 4 3 10 1 13 => 9, в отличие от прошлой задачи здесь разные 10 считает за одно число)");
         System.out.println("Исходные данные:");
         System.out.println(LIST_INT);
         System.out.println("Результат:");
-        System.out.println(LIST_INT.stream().sorted(Comparator.reverseOrder()).distinct().collect(Collectors.toList()).get(2));
+        System.out.println(LIST_INT.stream()
+                .distinct()
+                .sorted(Comparator.reverseOrder())
+                .collect(Collectors.toList())
+                .get(2));
 
         final List<Worker> LIST_WORKERS = List.of(
                 new Worker("Star Star", 93, WorkerPosition.ENGINEER),
@@ -85,14 +95,7 @@ public class StreamExamples {
         System.out.println("Результат:");
         System.out.println(Arrays.stream(in.split("\s|,\s"))
                 .map(String::toLowerCase)
-                .collect(Collectors.toMap(key -> key, value -> new ArrayList<>(Arrays.asList(value)),
-                        (value1, value2) -> { // в случае одинаковоых ключей объединим значение в один список
-                            value1.addAll(value2);
-                            return value1;
-                        }))
-                .entrySet()
-                .stream()
-                .collect(Collectors.toMap(o -> o.getKey(), o -> o.getValue().size()))
+                .collect(Collectors.groupingBy(s -> s, Collectors.counting()))
         );
 
         System.out.println("\n========= 8 =========");
@@ -114,7 +117,7 @@ public class StreamExamples {
                 "пусть это будет последняя строка"
         };
         System.out.println("Исходные данные:");
-        System.out.println(arrString);
+        System.out.println(Arrays.asList(arrString));
         System.out.println("Результат:");
         System.out.println(Arrays.stream(arrString)
                 .flatMap(s -> Arrays.stream(s.split(" ")))
