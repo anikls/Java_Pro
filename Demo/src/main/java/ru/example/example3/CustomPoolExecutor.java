@@ -23,13 +23,10 @@ public class CustomPoolExecutor {
                 Thread executedTask = threadIterator.next();
                 currentNumber++;
                 Thread.State state = executedTask.getState();
-                try {
-                    if (Thread.State.NEW.equals(state)) {
-                        executedTask.start();
-                    } else if (Thread.State.TERMINATED.equals(state)) {
-                        threadIterator.remove();
-                    }
-                } catch (IllegalThreadStateException ex) {
+                if (Thread.State.NEW.equals(state)) {
+                    executedTask.start();
+                } else if (Thread.State.TERMINATED.equals(state)) {
+                    threadIterator.remove();
                 }
             }
 
@@ -41,6 +38,7 @@ public class CustomPoolExecutor {
         }
     };
 
+    // Основной поток обработки
     private final Thread poolExecutorThread = new Thread(poolExecutorTask);
 
     public CustomPoolExecutor(int capacity) {
